@@ -28,3 +28,5 @@ if __name__ == '__main__':
     plt.show()
     x_pb_test = get_mat('features_mat_test2')#.real
     print(randomforest.predict(x_pb_test))
+    print(randomforest.predict(x_pb_test))
+    
