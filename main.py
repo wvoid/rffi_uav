@@ -26,5 +26,5 @@ if __name__ == '__main__':
     print(classification_report(y_test, y_pred))
     plot_confusion_matrix(randomforest, x_test, y_test)
     plt.show()
-    x_pb_test = get_mat('features_mat_test2')
+    x_pb_test = get_mat('features_mat_test2')#.real
     print(randomforest.predict(x_pb_test))
