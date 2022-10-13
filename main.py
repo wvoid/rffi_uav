@@ -30,4 +30,5 @@ if __name__ == '__main__':
     print(randomforest.predict(x_pb_test))
     print(randomforest.predict(x_pb_test))
     print(randomforest.predict(x_pb_test))
+    print(randomforest.predict(x_pb_test))
     
