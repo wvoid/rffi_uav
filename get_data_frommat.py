@@ -4,10 +4,10 @@ import os
 
 
 def save_to_traindata():
-    filename = 'F:\matlab\preamble_data\\features_mat_xcorr1'
-    filename1 = 'F:\matlab\preamble_data\\features_mat_xcorr2'
-    # filename = '/home/rs/1/preamble_data/features_mat1.mat'
-    # filename1 = '/home/rs/1/preamble_data/features_mat2.mat'
+    # filename = 'F:\matlab\preamble_data\\features_mat_xcorr1'
+    # filename1 = 'F:\matlab\preamble_data\\features_mat_xcorr2'
+    filename = '/home/rs/1/preamble_data/features_mat_xcorr1.mat'
+    filename1 = '/home/rs/1/preamble_data/features_mat_xcorr2.mat'
     data1 = so.loadmat(filename)
     data2 = so.loadmat(filename1)
     x1 = data1['features_mat1']
@@ -21,7 +21,7 @@ def save_to_traindata():
 
 
 def get_mat(filename):
-    #loacation = os.path.join('/home/rs/1/preamble_data', filename)
-    loacation = os.path.join('F:\matlab\preamble_data', filename)
+    loacation = os.path.join('/home/rs/1/preamble_data', filename)
+    # loacation = os.path.join('F:\matlab\preamble_data', filename)
     data = so.loadmat(loacation)
     return data[filename]
