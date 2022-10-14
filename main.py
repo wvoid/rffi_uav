@@ -15,10 +15,10 @@ if __name__ == '__main__':
     data = np.load(filename)
     data_pb_ps = data['data'].real
     label = data['label']
-    # plt.plot(data_pb_ps[599])
-    # plt.show()
+    plt.plot(data_pb_ps[600])
+    plt.show()
     target_name = [0, 1]
-    x_train, x_test, y_train, y_test = train_test_split(data_pb_ps, label, test_size=0.3)
+    x_train, x_test, y_train, y_test = train_test_split(data_pb_ps, label, test_size=0.9)
     randomforest = RandomForestClassifier(random_state=42, n_estimators=100)
     print(x_train.shape,y_train.shape)
     randomforest.fit(x_train, y_train.ravel())
@@ -26,8 +26,7 @@ if __name__ == '__main__':
     print(classification_report(y_test, y_pred))
     plot_confusion_matrix(randomforest, x_test, y_test)
     plt.show()
-    x_pb_test = get_mat('features_mat_test2')#.real
-    print(randomforest.predict(x_pb_test))
-    GGGGGGG GGGGG 
+    #x_pb_test = get_mat('features_mat_test2')#.real
+    #print(randomforest.predict(x_pb_test))
 
     
