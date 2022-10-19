@@ -1,18 +1,19 @@
 import os.path
 import numpy as np
 import scipy.io as so
+
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.ensemble import RandomForestClassifier
 from sklearn import svm
 from sklearn.metrics import classification_report
-from sklearn.metrics import plot_confusion_matrix
+from sklearn.metrics import plot_confusion_matrix, confusion_matrix
 from sklearn.decomposition import PCA
 from matplotlib import pyplot as plt
-from get_data_frommat import save_to_traindata, get_mat
+from get_data_frommat import save_to_traindata, get_mat, plt_cm
 
 if __name__ == '__main__':
-     # save_to_traindata()
-    filename = 'data_train/data_4rfs.npz'
+    # save_to_traindata()
+    filename = 'data_train/data_4rfs_1.npz'
     data = np.load(filename)
     data_pb_ps = data['data'].real
     label = data['label']
@@ -39,15 +40,19 @@ if __name__ == '__main__':
     randomforest = RandomForestClassifier(random_state=42, n_estimators=100)
     # svm_clf=svm.SVC()
 
-    randomforest.fit(x_train, y_train.ravel())
+    randomforest.fit(x_train, y_train)
     # svm_clf.fit(x_train,y_train.ravel())
 
     y_pred = randomforest.predict(x_test)
     print(classification_report(y_test, y_pred))
     plot_confusion_matrix(randomforest, x_test, y_test)
     # plot_confusion_matrix(svm_clf,x_test,y_test)
+    # c = confusion_matrix(y_test, y_pred)
+    # print(c)
     plt.show()
-    # x_pb_test = get_mat('features_mat_test1_holybro1')  # .real
+    x_pb_test = get_mat('features_mat_v52_197')  # .real
     # x_pb_test = pca.transform(x_pb_test)
-    # print(randomforest.predict(x_pb_test))
+    print(randomforest.predict(x_pb_test))
     # print(svm_clf.predict(x_pb_test))
+    # plt_cm(c)
+
