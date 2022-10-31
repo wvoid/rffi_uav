@@ -13,12 +13,11 @@ from get_data_frommat import save_to_traindata, get_mat, plt_cm
 
 if __name__ == '__main__':
     # save_to_traindata()
-    filename = 'data_train/data_4rfs_1.npz'
+    filename = 'data_train/data_6rf.npz'
     data = np.load(filename)
     data_pb_ps = data['data'].real
     label = data['label']
-
-    # pca = PCA(n_components=5)
+    # pca = PCA(n_components=2)
     # data_pb_ps = pca.fit_transform(data_pb_ps)
     # data_pb_ps_x1, data_pb_ps_x2 = np.empty((1, 2)), np.empty((1, 2))
     # for i in range(1200):
@@ -50,7 +49,7 @@ if __name__ == '__main__':
     # c = confusion_matrix(y_test, y_pred)
     # print(c)
     plt.show()
-    x_pb_test = get_mat('features_mat_v52_197')  # .real
+    x_pb_test = get_mat('features_mat_h2_2')  # .real
     # x_pb_test = pca.transform(x_pb_test)
     print(randomforest.predict(x_pb_test))
     # print(svm_clf.predict(x_pb_test))
