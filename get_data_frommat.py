@@ -17,20 +17,26 @@ def save_to_traindata():
     # filename1 = 'F:\matlab\preamble_data\\features_mat_xcorr2'
     # filename.append('/home/rs/1/features/10.26/features_mat_v1')
     # filename.append('/home/rs/1/features/10.26/features_mat_v2')
-    filename.append('/home/rs/1/features/10.26/features_mat_h1')
-    filename.append('/home/rs/1/features/10.26/features_mat_h2')
-    filename.append('/home/rs/1/features/10.26/features_mat_h3')
-    filename.append('/home/rs/1/features/10.26/features_mat_h4')
-    filename.append('/home/rs/1/features/10.26/features_mat_v1')
-    filename.append('/home/rs/1/features/10.26/features_mat_v2')
+    # filename.append('/home/rs/1/features/10.26/features_mat_h1')
+    # filename.append('/home/rs/1/features/10.26/features_mat_h2')
+    # filename.append('/home/rs/1/features/10.26/features_mat_h3')
+    # filename.append('/home/rs/1/features/10.26/features_mat_h4')
+    # filename.append('/home/rs/1/features/10.26/features_mat_v1')
+    # filename.append('/home/rs/1/features/10.26/features_mat_v2')
+    filename.append('F:\matlab\preamble_data\\11.5\\pb_mat_h1')
+    filename.append('F:\matlab\preamble_data\\11.5\\pb_mat_h2')
+    filename.append('F:\matlab\preamble_data\\11.5\\pb_mat_h3')
+    filename.append('F:\matlab\preamble_data\\11.5\\pb_mat_h4')
+    filename.append('F:\matlab\preamble_data\\11.5\\pb_mat_v1')
+    filename.append('F:\matlab\preamble_data\\11.5\\pb_mat_v2')
 
     len = 0
     x = []
     y = []
     for i in range(np.size(filename)):
         data = so.loadmat(filename[i])
-        x.append(data['features_mat'])
-        len = np.size(data['features_mat'], 0)
+        x.append(data['pb_mat'])
+        len = np.size(data['pb_mat'], 0)
         print(len)
         y_temp = np.empty((len, num))
         y_temp[:] = label[i]
@@ -63,15 +69,15 @@ def save_to_traindata():
     # y4 = np.empty((len_x4, 1))
     # y4[:] = 3
     # y = np.vstack((y1, y2, y3, y4))
-    filename2 = 'data_train/data_6rf'
+    filename2 = 'data_train/data_6rf_rawiq'
     np.savez(filename2, data=x, label=y)
 
 
 def get_mat(filename):
-    loacation = os.path.join('/home/rs/1/features/10.31', filename)
+    loacation = os.path.join('F:\matlab\preamble_data\\holybro\\11.8', filename)
     # loacation = os.path.join('F:\matlab\preamble_data', filename)
     data = so.loadmat(loacation)
-    return data['features_mat']
+    return data['pb_mat']
 
 
 def plt_cm(c):

@@ -13,7 +13,7 @@ from get_data_frommat import save_to_traindata, get_mat, plt_cm
 
 if __name__ == '__main__':
     # save_to_traindata()
-    filename = 'data_train/data_6rf.npz'
+    filename = 'data_train/data_6rf_rawiq.npz'
     data = np.load(filename)
     data_pb_ps = data['data'].real
     label = data['label']
@@ -34,22 +34,23 @@ if __name__ == '__main__':
     # plt.scatter(x2, y2, c='b', s=3)
     # plt.show()
 
-    x_train, x_test, y_train, y_test = train_test_split(data_pb_ps, label, test_size=0.3)
+    x_train, x_test, y_train, y_test = train_test_split(data_pb_ps, label, test_size=0.5)
 
-    randomforest = RandomForestClassifier(random_state=42, n_estimators=100)
+    randomforest = RandomForestClassifier(random_state=42, n_estimators=50)
     # svm_clf=svm.SVC()
 
     randomforest.fit(x_train, y_train)
     # svm_clf.fit(x_train,y_train.ravel())
 
     y_pred = randomforest.predict(x_test)
+    print(y_pred.shape,y_test.shape)
     print(classification_report(y_test, y_pred))
     plot_confusion_matrix(randomforest, x_test, y_test)
     # plot_confusion_matrix(svm_clf,x_test,y_test)
     # c = confusion_matrix(y_test, y_pred)
     # print(c)
     plt.show()
-    x_pb_test = get_mat('features_mat_h2_2')  # .real
+    x_pb_test = get_mat('pb_mat_v2').real
     # x_pb_test = pca.transform(x_pb_test)
     print(randomforest.predict(x_pb_test))
     # print(svm_clf.predict(x_pb_test))
