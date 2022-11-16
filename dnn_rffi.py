@@ -46,8 +46,8 @@ def train(train_loader):
             optim.step()
             total_train_step += 1
             avg_loss += res_loss
-            print(f'step:{total_train_step},res_loss:{res_loss}')
-    torch.save(model1, 'model/model_ep100')
+        print(f'epoch:{epoch},loss:{avg_loss/total_train_step}')
+    torch.save(model1, 'model/model_ep100_rawiq_nosnr_decfo_11.8')
 
 
 def eval(test_loader, model):
@@ -98,23 +98,23 @@ def draw_confnorm(confnorm):
 
 
 if __name__ == '__main__':
-    data = np.load('data_train/data_6rf_onehot.npz')
+    data = np.load('data_train/data_6rf_rawiq_onehot_nosnr_decfo_11.9_与11.8相同usrp型号.npz')
     data_pb = data['data']
     data_pb = complex2iq(data_pb)
     label = data['label']
-
     dataset = DataTrain(train_x=data_pb, train_y=label)
-    train_dataset, test_dataset = torch.utils.data.random_split(dataset, [int(0.7 * dataset.__len__()),
-                                                                          int(0.3 * dataset.__len__())])
+    train_dataset, test_dataset = torch.utils.data.random_split(dataset, [int(0.9 * dataset.__len__()),
+                                                                          int(0.1 * dataset.__len__())],generator=torch.Generator().manual_seed(1))
     train_loader = DataLoader(train_dataset, batch_size=128, shuffle=True)
     test_loader = DataLoader(test_dataset, batch_size=128)
     # train(train_loader)
-    mod = torch.load('model/model_ep100')
-    x=get_mat('pb_mat_h2')
-    x=complex2iq(x)
-    pred=mod(torch.tensor(x).float().to(device))
-    print(pred)
-    eval(test_loader, mod)
+    mod = torch.load('model/model_ep100_rawiq_nosnr_decfo_11.8')
+    # x=get_mat('pb_mat_4')[0:30]
+    # x=complex2iq(x)
+    # pred=mod(torch.tensor(x).float().to(device))
+    # print(pred)
+    eval(train_loader, mod)
+
     # result = mod(torch.tensor(test_dataset[1:20][0]).float().to(device))
     # print(result)
     # print(test_dataset[1:20][1])
